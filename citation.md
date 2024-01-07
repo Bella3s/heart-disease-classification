@@ -16,3 +16,6 @@ Code
 
 Multiple Confusion Matrix display: https://medium.com/@eceisikpolat/plot-and-customize-multiple-confusion-matrices-with-matplotlib-a19ed00ca16c
 
+Medical:
+
+ST segment: https://www.ncbi.nlm.nih.gov/books/NBK459364/
