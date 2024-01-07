@@ -1,5 +1,6 @@
 # Heart Disease Classification Project
 
+<img src=images/chest_pain_image.jpg width=50% align="center">
 
 ## Overview
 
@@ -7,7 +8,7 @@ This project creates a binary classification machine learning model, using the P
 
 ## The Business + Business Problem
 
-Heart Disease is a leading cause of death not only in the United States, but globaly as well according to the World Health Organization and Center for Disease Control. Cardiovascular diseases are estimated to be the cause of death for 17.9 million lives each year globally.
+Heart Disease is a leading cause of death not only in the United States, but globally as well according to the World Health Organization and Center for Disease Control. Cardiovascular diseases are estimated to be the cause of death for 17.9 million lives each year globally.
 
 This project is framed by a health care provider who would like to prevent further deaths by heart diseases with early identification and treatment. A binary classification machine learning model is created that takes in patients' information and predicts whether or not heart disease is present. The upmost goal is to identify as many people as possible who are ill prior to any serious health crises , such as a heart attack or stroke. Missing someone could be potentially fatal. However, the health care providers are also concerned with falsely categorizing healthy people with heart disease as this can place an undue burden on a healthy patient.
 
@@ -26,7 +27,7 @@ There are 11 independent variables present in the data set:
 | `ChestPainType`| Chest Pain Type: Typical Angina (TA), Atypical Angina (ATA), Non-Anginal Pain (NAP), or Asymptomatic (ASY) | 
 | `RestingBP` | Resting blood pressure (mm Hg) |
 | `Cholesterol` | Serum Cholesterol (mm/dl) | 
-| `FastingBS` | Fasting blod sugar: 1 if FastingBS > 120 mg/dl, otherwise 0 | 
+| `FastingBS` | Fasting blood sugar: 1 if FastingBS > 120 mg/dl, otherwise 0 | 
 | `RestingECG` | Resting electrocardiogram results: Normal (Normal), Having ST-T wave abnormality (ST), or Showing probable or definite left ventricular hypertrophy by Estes' criteria (LVH) |
 | `MaxHR` | Maximum heart rate achieved | 
 | `ExerciseAngina` | Yes if exercise-induced angina is present, otherwise No | 
@@ -37,18 +38,19 @@ There are 11 independent variables present in the data set:
 
 The project first checks for missing or invalid values, finding that the Cholesterol variable has a significant amount of datapoints with a zero value.  Numpy NaNs are put in place of these values such that a SimpleImputer can be used later in a Pipeline step during model creation. 
 
-Furthermore, the project explores the distribution of the target variable, finding a slight imbalance between the two classes (healthy patients and patients with heart disease).  However the imbalance is not great enough to call upon any data augmentation processes such as SMOTE.
+Furthermore, the project explores the distribution of the target variable, finding a slight imbalance between the two classes (healthy patients and patients with heart disease).  However, the imbalance is not great enough to call upon any data augmentation processes such as SMOTE.
 
-<img src=images/target_distribution.png width=40% align="center">
+<img src=images/target_distribution.png width=60% align="center">
 
 ### Model Iteration
 
-The model utlizes pipelines in order to process the data for modeling and iterate through five different models (using all of the default parameters).  The preprocessing pipeline includes steps for encoding the categorical data, inputing the mean for missing values via a SimpleImputer, and scaling the data with StandardScaler. A function is created that takes in a list of models, and for each model:
-- Creates a new pipeline with the preprocessing pipeline and the model as the two steps
-- Fits the new pipeline
-- Calls upon another helper function to retrive evaluaton metrics for the model based on evaluation data
+The model utilizes pipelines in order to process the data for modeling and iterate through five different models (using all of the default parameters).  The preprocessing pipeline includes steps for encoding the categorical data, inputting the mean for missing values via a SimpleImputer, and scaling the data with StandardScaler. A function is created that takes in a list of models, and for each model: 
 
-Then the function returns a dictionary of the evaluation metrics for each model, a list of confusion matrices for each model, and a list of the fitted models.
+- Creates a new pipeline with the preprocessing pipeline and the model as the two steps 
+- Fits the new pipeline 
+- Calls upon another helper function to retrieve evaluation metrics for the model based on evaluation data 
+
+Then the function returns a dictionary of the evaluation metrics for each model, a list of confusion matrices for each model, and a list of the fitted models themselves. 
 
 The five models that the function iterates through are:
 
@@ -58,25 +60,30 @@ The five models that the function iterates through are:
 - Random Forest
 - XGBoost
 
-<img src=images/model_iteration_results.png width=50% align="center">
+<img src=images/model_iteration_results.png align="center">
 
 The two most performant models were the Random Forest and XGBoost models.
 
 ### Hyperparameter Tuning
 
-In an attempt to create even better models, the project then goes through a process of hyperparameter tuning of these two most performant models.  For each model, a GridSearchCV and a RandomizedSearchCV is ran with values/distributions for four different parameters.  Furthermore, each search is ran with a default scoring, the scoring set to Precision, and the scoring set for Recall.  Twelve new models in total.  This is the most time consuming portion of the project, computationally speaking, and unfortunately none of the results beat the metrics found with the default parameters.  
+In an attempt to create even better models, the project then goes through a process of hyperparameter tuning of these two most performant models.  For each model, a GridSearchCV and a RandomizedSearchCV are run with values/distributions for four different parameters.  Furthermore, each search is run with a default scoring, the scoring set to Precision, and the scoring set to Recall;  Twelve new models in total.  This is the most time-consuming portion of the project, computationally speaking, and unfortunately none of the results beat the metrics found with the default parameters.   
 
 Thus, the Random Forest model with default parameters is chosen as the final model.
 
-## Final Model Results
+## Final Model Evaluation
 
-<img src=images/metric_evaluation.png width=40% align="left">
+After a final model is chosen, it is trained with all of the training data and evaluated with the hold-out test data.
+
+<img src=images/metric_evaluation.png width=50% align="left">
 <img src=images/confusion_matrix.png width=40% align="right">
+
+From the above graphs we can see that our final model is 90% accurate and has a recall score of 92%.  This is slightly worse than what we saw with the validation data, but still quite a well-performing model. 
+
 <img src=images/feature_importance.png width=60% align="center">
 
-From the above graphs we can see that our final model is 90% accurate and has a recall score of 92%.  The feature importance graph shows that the shape of the ST slope is by far the most important feature in our model, with Chest Pain Type as the second most important. 
+The feature importance graph shows that the shape of the ST slope is by far the most important feature in our model, with the mean accuracy of the model decreasing by about 12% when this feature is not included. The second most important feature is Chest Pain Type.
 
-## Recommendations
+## Conclusion
 
 Three recommendations are given to the health care providers in terms of what should actually be done or taken away from this project.
 
