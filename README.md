@@ -76,7 +76,8 @@ Thus, the Random Forest model with default parameters is chosen as the final mod
 After a final model is chosen, it is trained with all of the training data and evaluated with the hold-out test data.
 
 <img src=images/metric_evaluation.png width=59% align="left">
-<img src=images/confusion_matrix.png width=40% align="right">
+<img src=images/confusion_matrix.png width=39% align="right">
+
 
 From the above graphs we can see that our final model is 90% accurate and has a recall score of 92%.  This is slightly worse than what we saw with the validation data, but still quite a well-performing model. 
 
