@@ -1,6 +1,7 @@
 # Heart Disease Classification Project
-
-<img src=images/chest_pain_image.jpg width=50% align="center">
+<a href="https://www.pexels.com/photo/close-up-of-a-man-in-blue-polo-shirt-with-hands-on-chest-14569658/">
+<img src=images/chest_pain_image.jpg width=50% align="center" alt="close-up of a Man in Blue Polo Shirt with Hands on Chest">
+</a>
 
 ## Overview
 
