@@ -40,7 +40,7 @@ The project first checks for missing or invalid values, finding that the Cholest
 
 Furthermore, the project explores the distribution of the target variable, finding a slight imbalance between the two classes (healthy patients and patients with heart disease).  However, the imbalance is not great enough to call upon any data augmentation processes such as SMOTE.
 
-<img src=images/target_distribution.png width=60% align="center">
+<img src=images/target_distribution.png width=50% align="center">
 
 ### Model Iteration
 
@@ -60,7 +60,7 @@ The five models that the function iterates through are:
 - Random Forest
 - XGBoost
 
-<img src=images/model_iteration_results.png align="center">
+<img src=images/model_iteration_results.png width=70% align="center">
 
 The two most performant models were the Random Forest and XGBoost models.
 
@@ -74,12 +74,12 @@ Thus, the Random Forest model with default parameters is chosen as the final mod
 
 After a final model is chosen, it is trained with all of the training data and evaluated with the hold-out test data.
 
-<img src=images/metric_evaluation.png width=50% align="left">
+<img src=images/metric_evaluation.png width=60% align="left">
 <img src=images/confusion_matrix.png width=40% align="right">
 
 From the above graphs we can see that our final model is 90% accurate and has a recall score of 92%.  This is slightly worse than what we saw with the validation data, but still quite a well-performing model. 
 
-<img src=images/feature_importance.png width=60% align="center">
+<img src=images/feature_importance.png width=70% align="center">
 
 The feature importance graph shows that the shape of the ST slope is by far the most important feature in our model, with the mean accuracy of the model decreasing by about 12% when this feature is not included. The second most important feature is Chest Pain Type.
 
